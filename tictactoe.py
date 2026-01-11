@@ -102,7 +102,7 @@ def winner(board):
             else:
                 return None
 
-    # Check diagonals (From top left to bottom right)
+    # Check diagonal (From top left to bottom right)
     if board[0][0] == board[1][1] == board[2][2] and board[0][0] is not None:
         if board[0][0] == X:
             return X
@@ -111,7 +111,7 @@ def winner(board):
         else:
             return None
 
-    # Check diagonals (From top right to bottom left)
+    # Check diagonal (From top right to bottom left)
     if board[2][0] == board[1][1] == board[0][2] and board[2][0] is not None:
         if board[2][0] == X:
             return X
