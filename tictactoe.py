@@ -63,6 +63,11 @@ def result(board, action):
 
     i, j = action
 
+    # Make sure all the moves are within the board
+    if i < 0 or i > 2 or j < 0 or j > 2:
+        raise Exception("Invalid move: out of bounds")
+
+    # Make sure the move is on an empty cell
     if board[i][j] != EMPTY:
         raise Exception("Invalid move!")
 
@@ -77,9 +82,9 @@ def winner(board):
     Returns the winner of the game, if there is one.
     """
 
-    # Check columns
+    # Check horizotal (From left to right)
     for i in range(3):
-        if board[i][0] == board[i][1] == board[i][2]:
+        if board[i][0] == board[i][1] == board[i][2] and board[i][0] is not None:
             if board[i][0] == X:
                 return X
             elif board[i][0] == O:
@@ -87,9 +92,9 @@ def winner(board):
             else:
                 return None
 
-    # Check rows
+    # Check vertical (From top to bottom)
     for j in range(3):
-        if board[0][j] == board[1][j] == board[2][j]:
+        if board[0][j] == board[1][j] == board[2][j] and board[0][j] is not None:
             if board[0][j] == X:
                 return X
             elif board[0][j] == O:
@@ -98,7 +103,7 @@ def winner(board):
                 return None
 
     # Check diagonals (From top left to bottom right)
-    if board[0][0] == board[1][1] == board[2][2]:
+    if board[0][0] == board[1][1] == board[2][2] and board[0][0] is not None:
         if board[0][0] == X:
             return X
         elif board[0][0] == O:
@@ -107,7 +112,7 @@ def winner(board):
             return None
 
     # Check diagonals (From top right to bottom left)
-    if board[2][0] == board[1][1] == board[0][2]:
+    if board[2][0] == board[1][1] == board[0][2] and board[2][0] is not None:
         if board[2][0] == X:
             return X
         elif board[2][0] == O:
@@ -166,7 +171,7 @@ def Max_Value(board):
             best_value = output_value
             best_move = action
             
-    return [best_value, best_move]
+    return best_value, best_move
 
 def Min_Value(board):
 
